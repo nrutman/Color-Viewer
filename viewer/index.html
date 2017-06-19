@@ -3,86 +3,12 @@
     <head>
         <title>Color Palette Tool</title>
         <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var $input = $('#input');
-                var $colors = $('#colors');
-                var colorPattern = /^(\$[\w-]+):\s+(\#[\w]+);$/gi;
-
-                $input.on('change', renderColors);
-                renderColors();
-
-                function renderColors() {
-                    var codes = $input.val().split("\n");
-                    var isNewline = false;
-
-                    codes.forEach(function(code) {
-                        var parts = colorPattern.exec(code);
-
-                        if (!parts || parts.length !== 3) {
-                            isNewline = true;
-                            return;
-                        }
-
-                        var colorName = parts[1];
-                        var colorHex = parts[2];
-
-                        var $color = $('<li>')
-                            .css({
-                                backgroundColor: colorHex
-                            })
-                            .toggleClass('newline', isNewline);
-
-                        var $label = $('<span>')
-                            .addClass('label')
-                            .text(colorName);
-
-                        $color.append($label);
-                        $colors.append($color);
-                    });
-                }
-            });
-        </script>
-        <style media="screen">
-
-            body {
-                font-family: sans-serif;
-            }
-
-            #input {
-                width: 100%;
-                height: 300px;
-            }
-
-            #colors {
-                display: block;
-                list-style: none;
-                margin: 0;
-                padding: 0;
-            }
-
-            #colors li {
-                display: block;
-                float: left;
-                height: 200px;
-                margin: 1em;
-                position: relative;
-                width: 200px;
-            }
-
-            #colors .label {
-                background-color: white;
-                bottom: 0;
-                color: #777;
-                display: block;
-                padding: 0.2em 0.5em;
-                position: absolute;
-                right: 0;
-            }
-        </style>
+        <script src="js/viewer.js"></script>
+        <link rel="stylesheet" href="css/viewer.css">
     </head>
     <body>
-        <textarea id="input">
+        <textarea id="input" placeholder="Put color information here...">
+
 // Purple
 $color-primary: #5a2d8a;
 $color-primary-opt: #732582;
