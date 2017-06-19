@@ -2,6 +2,8 @@
 npm-debug.log*
 node_modules/
 
-# OSX temp files
+# OSX Temp Files
 *.DS_Store
 
+# Editor Temp Files
+.idea/
