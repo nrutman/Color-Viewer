@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Color Palette Tool</title>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var $input = $('#input');
+                var $colors = $('#colors');
+                var colorPattern = /^(\$[\w-]+):\s+(\#[\w]+);$/gi;
+
+                $input.on('change', renderColors);
+                renderColors();
+
+                function renderColors() {
+                    var codes = $input.val().split("\n");
+                    var isNewline = false;
+
+                    codes.forEach(function(code) {
+                        var parts = colorPattern.exec(code);
+
+                        if (!parts || parts.length !== 3) {
+                            isNewline = true;
+                            return;
+                        }
+
+                        var colorName = parts[1];
+                        var colorHex = parts[2];
+
+                        var $color = $('<li>')
+                            .css({
+                                backgroundColor: colorHex
+                            })
+                            .toggleClass('newline', isNewline);
+
+                        var $label = $('<span>')
+                            .addClass('label')
+                            .text(colorName);
+
+                        $color.append($label);
+                        $colors.append($color);
+                    });
+                }
+            });
+        </script>
+        <style media="screen">
+
+            body {
+                font-family: sans-serif;
+            }
+
+            #input {
+                width: 100%;
+                height: 300px;
+            }
+
+            #colors {
+                display: block;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            #colors li {
+                display: block;
+                float: left;
+                height: 200px;
+                margin: 1em;
+                position: relative;
+                width: 200px;
+            }
+
+            #colors .label {
+                background-color: white;
+                bottom: 0;
+                color: #777;
+                display: block;
+                padding: 0.2em 0.5em;
+                position: absolute;
+                right: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <textarea id="input">
+// Purple
+$color-primary: #5a2d8a;
+$color-primary-opt: #732582;
+$color-primary-opt-2: #a154ad;
+$color-primary-bright: #8e58a4;
+$color-primary-l1: #744c9e;
+$color-primary-l2: #9f81bb;
+$color-primary-l3: #c7b9db;
+$color-primary-l4: #f3eef6;
+$color-primary-d1: #512b78;
+$color-primary-d2: #361e55;
+$color-primary-d3: #1e1032;
+
+// Blue
+$color-secondary: #3d65af;
+$color-secondary-opt: #2d7ee2;
+$color-secondary-bright: #67c5f0;
+$color-secondary-l1: #547bbd;
+$color-secondary-l2: #84a4d5;
+$color-secondary-l3: #baccea;
+$color-secondary-d1: #2c57a7;
+$color-secondary-d2: #203e77;
+$color-secondary-d3: #102346;
+
+// Red
+$color-tertiary: #96257e;
+$color-tertiary-bright: #d42f92;
+$color-tertiary-l1: #ac3c92;
+$color-tertiary-l2: #c378b2;
+$color-tertiary-l3: #dcb5d5;
+$color-tertiary-d1: #80246f;
+$color-tertiary-d2: #5a154b;
+$color-tertiary-d3: #80246f;
+
+// Extended Palette
+$color-green: #00965f;
+$color-green-opt: #02b38c;
+$color-green-bright: #9ed193;
+$color-green-l1: #93d19d;
+$color-green-l2: #daf2e6;
+$color-green-l3: #daedd5;
+$color-green-l4: #e5fff6;
+
+$color-yellow: #febe14;
+$color-yellow-opt: #ebe017;
+$color-yellow-bright: #f9ed25;
+$color-yellow-l1: #fffde9;
+$color-yellow-l2: #fff483;
+
+$color-orange: #f37021;
+$color-orange-opt: #f99b2c;
+$color-orange-bright: #ffca28;
+$color-orange-peak: #f06f2f;
+
+$color-red: #bf2c4b;
+$color-red-opt: #ec3d5b;
+$color-red-bright: #f05f8b;
+$color-red-l2: #e994a8;
+$color-red-l3: #edd5dc;
+$color-red-l4: #f9ecef;
+$color-red-l5: #fef0f0;
+
+$color-gray: #566574;
+$color-gray-opt: #73828c;
+$color-gray-bright: #a9b9c8;
+
+// Grays
+$color-default-l3: #e8e8e8;
+$color-default-l2: #c8c8c8;
+$color-default-l1: #919191;
+$color-default:    #646464;
+$color-default-d1: #4b4b4b;
+$color-default-d2: #323232;
+$color-default-d3: #232323;
+
+$color-default-cool-l6: #f7f9f9;
+$color-default-cool-l5: #f1f3f3;
+$color-default-cool-l4: #e6ebeb;
+$color-default-cool-l3: #d3d8dd;
+$color-default-cool-l2: #c3c8cd;
+$color-default-cool-l1: #87919b;
+$color-default-cool:    #556473;
+$color-default-cool-d1: #414b55;
+$color-default-cool-d2: #2b333a;
+$color-default-cool-d3: #1e2429;
+        </textarea>
+        <ul id="colors"></ul>
+    </body>
+</html>
