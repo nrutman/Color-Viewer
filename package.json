@@ -1,0 +1,20 @@
+{
+  "name": "color-viewer",
+  "version": "1.0.0",
+  "description": "A simple HTML / Javascript UI for displaying a color palette",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nrutman/color-viewer.git"
+  },
+  "author": "Nathan Rutman",
+  "bugs": {
+    "url": "https://github.com/nrutman/color-viewer/issues"
+  },
+  "homepage": "https://github.com/nrutman/color-viewer#readme",
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
